@@ -35,7 +35,7 @@ let runawayEnabled = false
 let musicPlaying = true
 
 const catGif = document.getElementById('cat-gif')
-const yesBtn = document.getElementById('yes-btn')
+const siBtn = document.getElementById('si-btn')
 const noBtn = document.getElementById('no-btn')
 const music = document.getElementById('bg-music')
 
@@ -92,11 +92,11 @@ function handleNoClick() {
     noBtn.textContent = noMessages[msgIndex]
 
     // Grow the Yes button bigger each time
-    const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize)
-    yesBtn.style.fontSize = `${currentSize * 1.35}px`
+    const currentSize = parseFloat(window.getComputedStyle(siBtn).fontSize)
+    siBtn.style.fontSize = `${currentSize * 1.35}px`
     const padY = Math.min(18 + noClickCount * 5, 60)
     const padX = Math.min(45 + noClickCount * 10, 120)
-    yesBtn.style.padding = `${padY}px ${padX}px`
+    siBtn.style.padding = `${padY}px ${padX}px`
 
     // Shrink No button to contrast
     if (noClickCount >= 2) {

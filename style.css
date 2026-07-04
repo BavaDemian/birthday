@@ -9,9 +9,12 @@ body {
     font-family: 'Nunito', sans-serif;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Agregado: alinea todo hacia abajo, no al costado */
+    justify-content: flex-start; /* Modificado: empieza arriba para dar espacio al scroll */
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden; /* Modificado: oculta scroll horizontal */
+    overflow-y: auto;   /* Modificado: permite scroll vertical para ver las fotos */
+    padding: 20px 0;    /* Agregado: un pequeño margen arriba y abajo */
     background-image:
         radial-gradient(circle at 15% 85%, #ffb3c1 0%, transparent 40%),
         radial-gradient(circle at 85% 15%, #ff8fa3 0%, transparent 40%),
@@ -94,7 +97,7 @@ h1 {
     flex-wrap: wrap;
 }
 
-#yes-btn {
+#si-btn {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
     border: none;
@@ -109,12 +112,12 @@ h1 {
     letter-spacing: 1px;
 }
 
-#yes-btn:hover {
+#si-btn:hover {
     transform: scale(1.06) translateY(-2px);
     box-shadow: 0 10px 28px rgba(76, 175, 80, 0.55);
 }
 
-#yes-btn:active {
+#si-btn:active {
     transform: scale(0.98);
 }
 
@@ -203,4 +206,63 @@ h1 {
 .yes-container #cat-gif {
     width: 260px;
     height: 260px;
+}
+
+.photo-gallery {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.gallery-title {
+    font-family: 'Nunito', sans-serif;
+    color: #ff4b6e; /* Podés cambiarlo por el color rosa/rojo que uses */
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.photos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Efecto Polaroid */
+.photo-card {
+    background: white;
+    padding: 12px 12px 24px 12px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    max-width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Hace que la foto se adapte sin deformarse */
+    border-radius: 2px;
+}
+
+.photo-caption {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+/* Rotación divertida para las fotos */
+.photo-card:nth-child(odd) {
+    transform: rotate(-3deg);
+}
+.photo-card:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.photo-card:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 10;
 }
