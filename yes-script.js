@@ -61,3 +61,24 @@ function toggleMusic() {
         document.getElementById('music-toggle').textContent = '🔊'
     }
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const photos = document.querySelectorAll('.scroll-reveal');
+
+    const appearanceOptions = {
+        threshold: 0.15, // Se activa cuando se ve el 15% de la tarjeta de la foto
+        rootMargin: "0px 0px -50px 0px" // Margen inferior para que aparezca un poquito antes de tocar el fondo
+    };
+
+    const photoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Deja de observarla una vez que ya apareció
+            }
+        });
+    }, appearanceOptions);
+
+    photos.forEach(photo => {
+        photoObserver.observe(photo);
+    });
+});

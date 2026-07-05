@@ -1,35 +1,13 @@
-const gifStages = [
-    "https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif",    // 0 normal
-    "https://media1.tenor.com/m/uDugCXK4vI4AAAAd/chiikawa-hachiware.gif",  // 1 confused
-    "https://media.tenor.com/f_rkpJbH1s8AAAAj/somsom1012.gif",             // 2 pleading
-    "https://media.tenor.com/OGY9zdREsVAAAAAj/somsom1012.gif",             // 3 sad
-    "https://media1.tenor.com/m/WGfra-Y_Ke0AAAAd/chiikawa-sad.gif",       // 4 sadder
-    "https://media.tenor.com/CivArbX7NzQAAAAj/somsom1012.gif",             // 5 devastated
-    "https://media.tenor.com/5_tv1HquZlcAAAAj/chiikawa.gif",               // 6 very devastated
-    "https://media1.tenor.com/m/uDugCXK4vI4AAAAC/chiikawa-hachiware.gif"  // 7 crying runaway
-]
-
 const noMessages = [
-    "No",
-    "Are you positive? 🤔",
-    "Pookie please... 🥺",
-    "If you say no, I will be really sad...",
-    "I will be very sad... 😢",
-    "Please??? 💔",
-    "Don't do this to me...",
-    "Last chance! 😭",
-    "You can't catch me anyway 😜"
-]
-
-const yesTeasePokes = [
-    "try saying no first... I bet you want to know what happens 😏",
-    "go on, hit no... just once 👀",
-    "you're missing out 😈",
-    "click no, I dare you 😏"
+    "Estás segura, mi amor? 🤔",
+    "Por favoooooooorrrrrrr amorrrrrrrr",
+    "Me tas matando 😢",
+    "Pa wacho que mala q sos eh... 😭",
+    "Última oportunidad natutu, decí que sí! 😭",
+    "Igual no me vas a poder alcanzar 😜"
 ]
 
 let yesTeasedCount = 0
-
 let noClickCount = 0
 let runawayEnabled = false
 let musicPlaying = true
@@ -65,23 +43,19 @@ function toggleMusic() {
     }
 }
 
+// MODIFICADO: Ahora te deja pasar directo al "Sí" sin importar nada
 function handleYesClick() {
-    if (!runawayEnabled) {
-        // Tease her to try No first
-        const msg = yesTeasePokes[Math.min(yesTeasedCount, yesTeasePokes.length - 1)]
-        yesTeasedCount++
-        showTeaseMessage(msg)
-        return
-    }
     window.location.href = 'yes.html'
 }
 
 function showTeaseMessage(msg) {
     let toast = document.getElementById('tease-toast')
-    toast.textContent = msg
-    toast.classList.add('show')
-    clearTimeout(toast._timer)
-    toast._timer = setTimeout(() => toast.classList.remove('show'), 2500)
+    if (toast) {
+        toast.textContent = msg
+        toast.classList.add('show')
+        clearTimeout(toast._timer)
+        toast._timer = setTimeout(() => toast.classList.remove('show'), 2500)
+    }
 }
 
 function handleNoClick() {
@@ -103,10 +77,6 @@ function handleNoClick() {
         const noSize = parseFloat(window.getComputedStyle(noBtn).fontSize)
         noBtn.style.fontSize = `${Math.max(noSize * 0.85, 10)}px`
     }
-
-    // Swap cat GIF through stages
-    const gifIndex = Math.min(noClickCount, gifStages.length - 1)
-    swapGif(gifStages[gifIndex])
 
     // Runaway starts at click 5
     if (noClickCount >= 5 && !runawayEnabled) {
